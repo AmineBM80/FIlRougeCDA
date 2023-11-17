@@ -27,7 +27,6 @@ class CategoriesFixtures extends Fixture
         $this->createCategory('Reine de Neige', $parent, 'reine_des_neige.png', $manager);
         $this->createCategory('Aladdin', $parent, 'aladdin.png', $manager);
 
-        $parent = $this->createCategory('Marvel', $parent, 'marvel.png', $manager);
         $this->createCategory('IronMan', $parent, 'iron_man.png', $manager);
         $this->createCategory('Capitain America', $parent, 'capitain_america.png', $manager);
         $this->createCategory('SpiderMan', $parent, 'spiderman.png', $manager);
