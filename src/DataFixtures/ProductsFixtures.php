@@ -25,7 +25,7 @@ class ProductsFixtures extends Fixture
             $product->setSlug($this->slugger->slug($product->getName())->lower());
             $product->setprice($faker->numberBetween(100,100000000));
             $product->setDivise($faker->realTextBetween(1,10));
-            $product->setIsActive($faker->boolean());
+            $product->setStock($faker->numberBetween(0,500));
 
             $category = $this->getReference('cat-'.rand(1,8));
             $product->setCategorie($category);

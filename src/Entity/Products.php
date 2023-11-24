@@ -33,9 +33,6 @@ class Products
     #[ORM\Column(length: 50)]
     private ?string $divise = null;
 
-    #[ORM\Column]
-    private ?bool $is_active = null;
-
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Categories $categorie = null;
 
@@ -47,6 +44,9 @@ class Products
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Images::class)]
     private Collection $images;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $stock = null;
 
     public function __construct()
     {
@@ -108,18 +108,6 @@ class Products
         return $this;
     }
 
-    public function isIsActive(): ?bool
-    {
-        return $this->is_active;
-    }
-
-    public function setIsActive(bool $is_active): static
-    {
-        $this->is_active = $is_active;
-
-        return $this;
-    }
-
     public function getCategorie(): ?Categories
     {
         return $this->categorie;
@@ -131,8 +119,6 @@ class Products
 
         return $this;
     }
-
-
 
     /**
      * @return Collection<int, Details>
@@ -202,6 +188,18 @@ class Products
                 $image->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): static
+    {
+        $this->stock = $stock;
 
         return $this;
     }

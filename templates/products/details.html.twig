@@ -1,10 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detail de {% endblock %}
+{% block title %}Detail de {{product.name}} {% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Detail de </h1>
-</div>
+    <div class="product-content">
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center">
+                    <div class="card mx-auto">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                    <div class="card-body rounded-bottom">
+                        <h4 class="card-title">{{ product.name }}</h4>
+                        <div class="col-6">
+                            <div id="carouselExampleIndicators" class="carousel slide">
+                            <div class="carousel-indicators">
+                            {% for iteration in 1..product.images|length %}
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to=" {{iteration - 1 }}" {{ (loop.first ) ? 'class="active" aria-current="true"' : '' }} aria-label="Slide {{iteration}}"></button>
+                            {% endfor %}
+                            </div>
+                            <div class="carousel-inner">
+                            {% for image in product.images %}
+                                <div class="carousel-item {{ (loop.first ) ? 'active' : '' }}">
+                                <img src="{{ asset('assets/uploads/') ~ image.name }}" class="d-block w-100" alt="{{product.name}}">
+                                </div>
+                            {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                        <p class="card-text">Description : {{ product.description }}</p>
+                        <p class="card-text">Categorie : {{ product.categorie.name }}</p>
+                        <p class="card-text">Prix : {{ product.price / 100}} {{product.divise}} </p>
+                        </div>
+                        {% if product.stock > 0 %}
+                            <a href="" class="button mb-3 btn-success">Ajouter au panier</a>
+                        {% else %}
+                            <p class="text-danger">Temporairement en rupture de stock</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+        </div>
+    </div>
 {% endblock %}
