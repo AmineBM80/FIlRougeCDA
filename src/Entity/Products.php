@@ -42,7 +42,7 @@ class Products
     #[ORM\ManyToOne(inversedBy: 'livraison')]
     private ?Deliveries $deliveries = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Images::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Images::class, cascade:['persist'])]
     private Collection $images;
 
     #[ORM\Column(nullable: true)]
